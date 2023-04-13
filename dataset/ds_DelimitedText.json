@@ -33,6 +33,31 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "Nome da linha",
+				"type": "String"
+			},
+			{
+				"name": "Nome da rua",
+				"type": "String"
+			},
+			{
+				"name": "Endereço completo",
+				"type": "String"
+			},
+			{
+				"name": "Estado",
+				"type": "String"
+			},
+			{
+				"name": "País",
+				"type": "String"
+			},
+			{
+				"name": "Ordem",
+				"type": "String"
+			}
+		]
 	}
 }
