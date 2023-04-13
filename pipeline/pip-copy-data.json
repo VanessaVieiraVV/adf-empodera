@@ -3,9 +3,16 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data",
+				"name": "Copy_csv_to_SQL",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy_csv_to_parquet",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -50,7 +57,10 @@
 								"value": "@pipeline().parameters.container_par",
 								"type": "Expression"
 							},
-							"ds_directory": "csv",
+							"ds_directory": {
+								"value": "@pipeline().parameters.directory_par",
+								"type": "Expression"
+							},
 							"ds_filename": "Customers.csv"
 						}
 					}
@@ -71,6 +81,174 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy_csv_to_parquet",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CustomerID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CustomerID",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Gender",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Gender",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Age",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Age",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Annual Income ($)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Annual_Income_($)",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Spending Score (1-100)",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Spending_Score_(1-100)",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Profession",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Profession",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Work Experience",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Work_Experience",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Family Size",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Family_Size",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_DelimitedText",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_container": {
+								"value": "@pipeline().parameters.container_par",
+								"type": "Expression"
+							},
+							"ds_directory": {
+								"value": "@pipeline().parameters.directory_par",
+								"type": "Expression"
+							},
+							"ds_filename": "Customers-com-espaço-em-branco.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_container": {
+								"value": "@pipeline().parameters.container_par",
+								"type": "Expression"
+							},
+							"ds_directory": "parquet"
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
@@ -79,15 +257,16 @@
 				"defaultValue": "bronze"
 			},
 			"directory_par": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "csv"
 			},
 			"schema_par": {
 				"type": "string",
-				"defaultValue": "Moovit"
+				"defaultValue": "dbo"
 			},
 			"table_par": {
 				"type": "string",
-				"defaultValue": "Itinerarios"
+				"defaultValue": "Clientes"
 			}
 		},
 		"annotations": [],
