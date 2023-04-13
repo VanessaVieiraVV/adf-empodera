@@ -1,0 +1,9 @@
+{
+	"name": "adf-empodera-01",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "773315f1-686f-4e72-91a8-9b3f4b003cd5",
+		"tenantId": "cf36141c-ddd7-45a7-b073-111f66d0b30c"
+	}
+}
