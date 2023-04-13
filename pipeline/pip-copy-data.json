@@ -1,6 +1,62 @@
 {
 	"name": "pip-copy-data",
 	"properties": {
+		"activities": [
+			{
+				"name": "Copy data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false
+				},
+				"outputs": [
+					{
+						"referenceName": "ds_AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_schema": {
+								"value": "@pipeline().parameters.schema_par",
+								"type": "Expression"
+							},
+							"ds_table": {
+								"value": "@pipeline().parameters.table_par",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"container_par": {
+				"type": "string",
+				"defaultValue": "bronze"
+			},
+			"directory_par": {
+				"type": "string"
+			},
+			"schema_par": {
+				"type": "string",
+				"defaultValue": "Moovit"
+			},
+			"table_par": {
+				"type": "string",
+				"defaultValue": "Itinerarios"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-04-13T00:14:11Z"
 	},
