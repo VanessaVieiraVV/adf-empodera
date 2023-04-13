@@ -44,7 +44,15 @@
 				"inputs": [
 					{
 						"referenceName": "ds_DelimitedText",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_container": {
+								"value": "@pipeline().parameters.container_par",
+								"type": "Expression"
+							},
+							"ds_directory": "csv",
+							"ds_filename": "Moovit_Webscraping_RMR.csv"
+						}
 					}
 				],
 				"outputs": [

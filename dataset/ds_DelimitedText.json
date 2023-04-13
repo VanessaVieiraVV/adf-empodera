@@ -22,7 +22,11 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "Moovit_Webscraping_RMR.csv",
-				"folderPath": "csv"
+				"folderPath": "csv",
+				"fileSystem": {
+					"value": "@dataset().ds_container",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
