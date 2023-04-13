@@ -1,17 +1,6 @@
 {
 	"name": "pip-copy-data",
 	"properties": {
-		"activities": [
-			{
-				"name": "Wait1",
-				"type": "Wait",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"waitTimeInSeconds": 1
-				}
-			}
-		],
 		"annotations": [],
 		"lastPublishTime": "2023-04-13T00:14:11Z"
 	},
