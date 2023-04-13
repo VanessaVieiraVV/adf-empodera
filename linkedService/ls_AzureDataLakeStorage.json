@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://adlsempodera01.dfs.core.windows.net/",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEVBREE4RkQzLTA3NEItNENDQS05NTY3LTlDQUU0OEZDOThDNV9kZjQ3N2M3Ny1kYjllLTQyZTAtYjZlNC1jYjZmZTA4OWNhYjEiDQp9"
+			"url": "https://adlsempodera02.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEVBREE4RkQzLTA3NEItNENDQS05NTY3LTlDQUU0OEZDOThDNV81ZWI1NjM4ZC0wOTA3LTQ1ZDUtYmEyOS1iYzNjMzAzNjQ5Y2IiDQp9"
 		}
 	}
 }
