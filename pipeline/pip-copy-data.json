@@ -162,7 +162,7 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Annual_Income_($)",
+									"name": "Annual_Income",
 									"physicalType": "UTF8"
 								}
 							},
@@ -173,7 +173,7 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Spending_Score_(1-100)",
+									"name": "Spending_Score",
 									"physicalType": "UTF8"
 								}
 							},
@@ -246,6 +246,43 @@
 								"type": "Expression"
 							},
 							"ds_directory": "parquet"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy_SQL_to_parquet",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_schema": {
+								"value": "@pipeline().parameters.schema_par",
+								"type": "Expression"
+							},
+							"ds_table": {
+								"value": "@pipeline().parameters.table_par",
+								"type": "Expression"
+							}
 						}
 					}
 				]
